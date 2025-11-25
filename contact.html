@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Corner | Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo" aria-label="Community Corner Home">
+        <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="40" fill="var(--primary)"/>
+          <path d="M30 50 Q50 30, 70 50 Q50 70, 30 50" fill="var(--secondary)"/>
+        </svg>
+        <span class="logo-name">The Community Corner</span>
+      </a>
+      <nav>
+        <button class="menu-toggle"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="community.html">Events & Initiatives</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+ <!-- Contact page -->
+  <main id="main-content" class="container">
+    <section class="page-hero">
+      <h1 style="margin-bottom: 0.1rem;">Contact Us</h1>
+      <p>We'd love to hear from you!</p>
+    </section>
+
+    <div class="contact-grid">
+      <section class="contact-form-section">
+        <h2>Send a Message</h2>
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" required>
+          </div>
+          <div class="form-group full-width">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send Message</button>
+          <p id="contact-success" class="success-message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="contact-info">
+        <h2>Contact Information</h2>
+        <p><strong>Phone:</strong> (555) 123-4567</p>
+        <p><strong>Email:</strong> info@communitycorner.org</p>
+        <p><strong>Address:</strong> 123 Main Street, Anytown, ST 12345</p>
+        <h3>Location</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Community Corner Location"></iframe>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h3>Community Corner</h3><p>Connecting people, building futures.</p></div>
+        <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="community.html">Events & Initiatives</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="accessibility-controls">
+          <button id="increase-text">A+</button>
+          <button id="decrease-text">A-</button>
+          <button id="toggle-contrast">HC</button>
+        </div>
+        <div><h4>Follow Us</h4><div class="social-links"><a href="#" aria-label="Twitter">T</a><a href="#" aria-label="Facebook">F</a><a href="#" aria-label="Instagram">I</a></div></div>
+      </div>
+      <p class="copyright">© <span id="current-year"></span> Community Corner. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

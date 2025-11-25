@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Corner | Admin Dashboard</title>
+  <meta name="description" content="Admin panel for managing events, registrations and community data."/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header admin-header">
+    <div class="container">
+      <a href="index.html" class="logo" aria-label="Community Corner Home">
+        <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="40" fill="var(--primary)"/>
+          <path d="M30 50 Q50 30, 70 50 Q50 70, 30 50" fill="var(--secondary)"/>
+        </svg>
+        <span class="logo-name">The Community Corner</span>
+      </a>
+
+      <nav aria-label="Admin navigation">
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="admin-nav">
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="admin-nav" class="nav-links">
+          <li><a href="#dashboard" class="active">Dashboard</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#registrations">Registrations</a></li>
+          <li><a href="#volunteers">Volunteers</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#" id="logout" class="logout-btn">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="admin-main">
+    <div class="container">
+
+      <!-- LOGIN -->
+      <section id="login-section" class="admin-card login-card">
+        <div class="card-header">
+          <h1>Admin Login</h1>
+          <p>Please sign in to access the dashboard.</p>
+        </div>
+        <form id="login-form" novalidate class="admin-form">
+          <div class="form-group">
+            <label for="admin-email">Email Address</label>
+            <input type="email" id="admin-email" value="admin@community.com" required />
+            <p id="email-error" class="error-message" aria-live="polite"></p>
+          </div>
+          <div class="form-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" value="password123" required />
+            <p id="password-error" class="error-message" aria-live="polite"></p>
+          </div>
+          <button type="submit" class="btn-primary btn-large">Sign In</button>
+          <p class="form-note">Demo: <strong>admin@community.com</strong> / <strong>password123</strong></p>
+        </form>
+      </section>
+
+      <!-- DASHBOARD (hidden until login) -->
+      <div id="dashboard" style="display:none;">
+        <section class="dashboard-overview">
+          <h1>Dashboard Overview</h1>
+          <p class="welcome-text">Welcome back, Administrator.</p>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon">Calendar</div><div class="stat-value" id="total-events">0</div><div class="stat-label">Total Events</div></div>
+            <div class="stat-card"><div class="stat-icon">People</div><div class="stat-value" id="total-registrations">0</div><div class="stat-label">Registrations</div></div>
+            <div class="stat-card"><div class="stat-icon">Mail</div><div class="stat-value" id="total-subscribers">0</div><div class="stat-label">Newsletter Subscribers</div></div>
+            <div class="stat-card"><div class="stat-icon">Handshake</div><div class="stat-value" id="total-volunteers">0</div><div class="stat-label">Volunteers</div></div>
+          </div>
+        </section>
+
+        <!-- Events -->
+        <section id="events" class="admin-card">
+          <div class="card-header">
+            <h2>Event Management</h2>
+            <button id="add-event-btn" class="btn-secondary">Add New Event</button>
+          </div>
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th><th>Date & Time</th><th>Location</th><th>Capacity</th><th>Registered</th><th class="action-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="events-list"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Registrations -->
+        <section id="registrations" class="admin-card">
+          <div class="card-header">
+            <h2>Event Registrations</h2>
+            <button id="export-csv" class="btn-secondary">Export to CSV</button>
+          </div>
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Event</th><th>Name</th><th>Email</th><th>Phone</th><th>Registered On</th>
+                </tr>
+              </thead>
+              <tbody id="registrations-list"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Volunteers Section -->
+        <section id="volunteers" class="admin-card">
+          <div class="card-header">
+            <h2>Volunteer Registrations</h2>
+            <!-- Add this button inside the <div class="card-header"> of the Volunteers section -->
+            <button id="clear-volunteers" class="btn-secondary">Clear All Volunteers</button>
+            <button id="export-volunteers" class="btn-secondary">Export to CSV</button>
+          </div>
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Skills/Interests</th>
+                  <th>Availability</th>
+                  <th>Registered On</th>
+                </tr>
+              </thead>
+              <tbody id="volunteers-list"></tbody>
+            </table>
+            <p id="no-volunteers" class="no-data" style="display:none; text-align:center; padding:2rem 0;">
+              No volunteers have registered yet.
+            </p>
+          </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section id="newsletter" class="admin-card">
+          <div class="card-header">
+            <h2>Newsletter Subscribers</h2>
+            <button id="export-subscribers" class="btn-secondary">Export List</button>
+          </div>
+          <div class="subscribers-list" id="subscribers-list"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h3>Community Corner</h3><p>Connecting people, building futures.</p></div>
+        <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="community.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="accessibility-controls">
+          <button id="increase-text">A+</button>
+          <button id="decrease-text">A-</button>
+          <button id="toggle-contrast">HC</button>
+        </div>
+        <div><h4>Follow Us</h4><div class="social-links"><a href="#" aria-label="Twitter">T</a><a href="#" aria-label="Facebook">F</a><a href="#" aria-label="Instagram">I</a></div></div>
+      </div>
+      <p class="copyright">© <span id="current-year"></span> Community Corner. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Event Modal -->
+  <div id="event-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Add New Event</h2>
+        <button class="modal-close" aria-label="Close modal">×</button>
+      </div>
+      <form id="event-form" novalidate>
+        <input type="hidden" id="event-id"/>
+        <div class="form-grid">
+          <div class="form-group"><label for="event-title">Event Title *</label><input type="text" id="event-title" required/></div>
+          <div class="form-group"><label for="event-date">Date *</label><input type="date" id="event-date" required/></div>
+          <div class="form-group"><label for="event-time">Time</label><input type="time" id="event-time"/></div>
+          <div class="form-group"><label for="event-location">Location *</label><input type="text" id="event-location" required/></div>
+          <div class="form-group"><label for="event-capacity">Capacity</label><input type="number" id="event-capacity" min="1" value="100"/></div>
+          <div class="form-group"><label for="event-category">Category</label>
+            <select id="event-category">
+              <option>Festival</option><option>Environment</option><option>Education</option><option>Workshop</option>
+            </select>
+          </div>
+          <div class="form-group full-width"><label for="event-description">Description</label>
+            <div class="textarea-wrapper">
+              <textarea id="event-description" placeholder="Enter event description..."></textarea>
+            </div>
+          </div>
+          <div class="form-group full-width"><label for="event-image">Image URL</label><input type="url" id="event-image"/></div>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary">Save Event</button>
+          <button type="button" class="btn-cancel modal-close">Cancel</button>  
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
